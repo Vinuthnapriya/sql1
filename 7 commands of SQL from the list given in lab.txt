@@ -1,0 +1,59 @@
+1.create a table
+SQL> CREATE TABLE comemployees
+  2  ( employeeid number(10),
+  3    employeename varchar2(50),
+  4    city varchar2(50)
+  5  );
+
+Table created.
+
+
+
+
+2. create a table with constraints
+CREATE TABLE comemployee
+( employeeid number(10) PRIMARY KEY,
+  employeename varchar2(50) NOT NULL,
+  city varchar2(50) NOT NULL
+);
+
+Table created.
+
+
+3.add a columnto an employee table
+ALTER TABLE comemployee
+ADD salary number;
+			
+
+Table altered.
+
+
+4.alter a column datatype of your choice
+ALTER TABLE comemployee
+MODIFY salary decimal;
+
+
+Table altered.
+
+5.delete a column
+ ALTER TABLE comemployee
+ DROP COLUMN salary;
+
+
+Table altered.
+
+6.create a department table
+CREATE TABLE department1
+( deptid number(10) PRIMARY KEY,
+  deptname varchar2(10) NOT NULL
+);
+
+Table created.
+
+7.alter employee table with foreign key
+ALTER TABLE comemployee
+add FOREIGN KEY (employeeid)
+REFERENCES department1(deptid);
+
+Table altered.
+
