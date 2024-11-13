@@ -1,0 +1,460 @@
+1. Create a products table, product id, price, product name, category.
+
+create table products03
+(
+  product_id number(10),
+  product_name varchar2(50),
+  price number(10),
+  category varchar2(50)
+);
+
+o/p: Table Created.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. Insert values of 10 records into the products table
+	a. insert single record.
+	b. insert multiple records.
+
+
+a. 
+ 
+insert into products03
+values(1,'Brush',50.5,'Hygiene');
+
+o/p: 1 row created
+
+b.
+
+insert all
+into products03(product_id, product_name,price,category)values(2,'cooker',19.99,'electronic'),
+into products03(product_id, product_name,price,category)values(3,'jeans',29.99,'clothing'),
+into products03(product_id, product_name,price,category)values(4,'heater',32.43,'electronic'),
+into products03(product_id, product_name,price,category)values(5,'bread',19.99,'food'),
+into products03(product_id, product_name,price,category)values(6,'hammer',15.50,'tools')
+select * from dual;
+
+o/p: 5 rows created.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+3. Extract or show the records in products table.
+
+select * from products
+
+product_id	product_name	category	price
+1	        Smartphone	Electronics	1200
+2	        Laptop	        Electronics	1500
+3	        Refrigerator	Home Appliances	800
+4	        Washing Machine	Home Appliances	1200
+5	        Television	Electronics	2200
+6	        Coffee Maker	Kitchen	        150
+
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Write a query to find all product name and category greater than 1000 from the products table.
+
+
+CREATE TABLE products (
+  product_id NUMBER(10),
+  product_name VARCHAR2(50),
+  category VARCHAR2(50),
+  price DECIMAL(10, 2)
+);
+
+o/p: Table created.
+
+INSERT INTO products (product_id, product_name, category, price)
+VALUES (1, 'Smartphone', 'Electronics', 1200.00);
+
+o/p: 1 row created.
+
+
+INSERT ALL
+    INTO products (product_id, product_name, category, price) VALUES (2, 'Laptop', 'Electronics', 1500.00)
+    INTO products (product_id, product_name, category, price) VALUES (3, 'Refrigerator', 'Home Appliances', 800.00)
+    INTO products (product_id, product_name, category, price) VALUES (4, 'Washing Machine', 'Home Appliances', 1200.00)
+    INTO products (product_id, product_name, category, price) VALUES (5, 'Television', 'Electronics', 2200.00)
+    INTO products (product_id, product_name, category, price) VALUES (6, 'Coffee Maker', 'Kitchen', 150.00)
+SELECT * FROM dual;
+
+o/p: 5 rows created.
+
+SELECT product_name, category
+FROM products
+WHERE price > 1000;
+
+o/p:
+
+product_name	category
+Smartphone	Electronics
+Laptop	        Electronics
+Washing Machine	Home Appliances
+Television	Electronics
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5. Write a query to calculate the average salary for all companies , rename the column as average_salary.
+
+CREATE TABLE company_employees (
+  emp_id NUMBER(10),
+  emp_name VARCHAR2(50),
+  company VARCHAR2(50),
+  salary DECIMAL(10, 2)
+);
+
+o/p: Table created.
+
+INSERT INTO company_employees (emp_id, emp_name, company, salary)
+VALUES (1, 'Alice Johnson', 'TechCorp', 70000.00);
+
+o/p: 1 row created.
+
+INSERT INTO company_employees (emp_id, emp_name, company, salary)
+VALUES (2, 'Bob Brown', 'HealthInc', 55000.00);
+
+INSERT INTO company_employees (emp_id, emp_name, company, salary)
+VALUES (3, 'Carol White', 'TechCorp', 75000.00);
+
+INSERT INTO company_employees (emp_id, emp_name, company, salary)
+VALUES (4, 'David Green', 'RetailHub', 45000.00);
+
+INSERT INTO company_employees (emp_id, emp_name, company, salary)
+VALUES (5, 'Eve Black', 'FinanceCorp', 70000.00);
+
+INSERT INTO company_employees (emp_id, emp_name, company, salary)
+VALUES (6, 'Frank Blue', 'HealthInc', 62000.00);
+
+INSERT INTO company_employees (emp_id, emp_name, company, salary)
+VALUES (7, 'Grace Gold', 'RetailHub', 50000.00);
+
+o/p:
+6 rows created.
+
+SELECT company, AVG(salary) AS average_salary
+FROM company_employees
+GROUP BY company;
+
+o/p:
+company	        average_salary
+FinanceCorp	70000
+HealthInc	58500
+RetailHub	47500
+TechCorp	72500
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6. Write a query to determine department name and location of people who live in the location that starts with 's'.
+
+CREATE TABLE employees (
+  emp_id NUMBER(10),
+  emp_name VARCHAR2(50),
+  department_name VARCHAR2(50),
+  location VARCHAR2(50)
+);
+
+o/p: Table created.
+
+INSERT INTO employees (emp_id, emp_name, department_name, location)
+VALUES (1, 'John Doe', 'IT', 'San Francisco');
+
+o/p: 1 row created.
+
+INSERT ALL
+    INTO employees (emp_id, emp_name, department_name, location) VALUES (2, 'Jane Smith', 'HR', 'Seattle')
+    INTO employees (emp_id, emp_name, department_name, location) VALUES (3, 'Alice Johnson', 'Finance', 'Chicago')
+    INTO employees (emp_id, emp_name, department_name, location) VALUES (4, 'Bob Brown', 'Marketing', 'San Diego')
+    INTO employees (emp_id, emp_name, department_name, location) VALUES (5, 'Carol White', 'Sales', 'Boston')
+    INTO employees (emp_id, emp_name, department_name, location) VALUES (6, 'David Green', 'IT', 'Sacramento')
+    INTO employees (emp_id, emp_name, department_name, location) VALUES (7, 'Eve Black', 'Finance', 'San Jose')
+SELECT * FROM dual;
+
+o/p: 6 rows created.
+
+SELECT department_name, location
+FROM employees
+WHERE location LIKE 'S%';
+
+o/p:
+
+department_name	 location
+IT	         San Francisco
+HR	         Seattle
+Marketing	 San Diego
+IT	         Sacramento
+Finance	         San Jose
+HR	         Seattle
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+7. Write a query to select distinct companies from the work table.
+
+CREATE TABLE work (
+  emp_id NUMBER(10),
+  emp_name VARCHAR2(50),
+  company VARCHAR2(50),
+  position VARCHAR2(50),
+  salary DECIMAL(10, 2)
+);
+
+o/p: Table created.
+
+INSERT INTO work (emp_id, emp_name, company, position, salary)
+VALUES (1, 'Alice Johnson', 'TechCorp', 'Developer', 60000.00);
+
+o/p: 1 row created.
+
+INSERT ALL
+    INTO work (emp_id, emp_name, company, position, salary) VALUES (2, 'Bob Brown', 'HealthInc', 'Analyst', 55000.00)
+    INTO work (emp_id, emp_name, company, position, salary) VALUES (3, 'Carol White', 'TechCorp', 'Manager', 75000.00)
+    INTO work (emp_id, emp_name, company, position, salary) VALUES (4, 'David Green', 'RetailHub', 'Sales Associate', 45000.00)
+    INTO work (emp_id, emp_name, company, position, salary) VALUES (5, 'Eve Black', 'FinanceCorp', 'Accountant', 70000.00)
+    INTO work (emp_id, emp_name, company, position, salary) VALUES (6, 'Frank Blue', 'HealthInc', 'Developer', 62000.00)
+    INTO work (emp_id, emp_name, company, position, salary) VALUES (7, 'Grace Gold', 'RetailHub', 'Manager', 50000.00)
+SELECT * FROM dual;
+
+o/p: 6 rows created.
+
+SELECT DISTINCT company
+FROM work;
+
+o/p:
+company
+TechCorp
+HealthInc
+RetailHub
+FinanceCorp
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+8. Write a query to find the total count of books whose genre is fiction.
+
+CREATE TABLE books (
+  book_id NUMBER(10),
+  title VARCHAR2(100),
+  author VARCHAR2(50),
+  genre VARCHAR2(50),
+  price DECIMAL(10, 2),
+  published_yr number(10)
+);
+
+o/p: Table created.
+
+INSERT INTO books (book_id, title, author, genre, price)
+VALUES (1, 'The Great Gatsby', 'F. Scott Fitzgerald', 'Fiction', 15.99);
+
+o/p: 1 row created.
+
+
+INSERT ALL
+    INTO books (book_id, title, author, genre, price) VALUES (2, 'To Kill a Mockingbird', 'Harper Lee', 'Fiction', 12.99)
+    INTO books (book_id, title, author, genre, price) VALUES (3, '1984', 'George Orwell', 'Dystopian', 14.99)
+    INTO books (book_id, title, author, genre, price) VALUES (4, 'Pride and Prejudice', 'Jane Austen', 'Romance', 9.99)
+    INTO books (book_id, title, author, genre, price) VALUES (5, 'The Catcher in the Rye', 'J.D. Salinger', 'Fiction', 10.99)
+    INTO books (book_id, title, author, genre, price) VALUES (6, 'Moby Dick', 'Herman Melville', 'Adventure', 11.99)
+    INTO books (book_id, title, author, genre, price) VALUES (7, 'Brave New World', 'Aldous Huxley', 'Dystopian', 13.99)
+SELECT * FROM dual;
+
+o/p: 6 rows created.
+
+SELECT COUNT(*) AS total_fiction_books
+FROM books
+WHERE genre = 'Fiction';
+
+o/p:
+
+total_fiction_books
+3
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+9. Write a query to select only the movie names where the ratings are greater than 7 but less than 9.
+
+
+create table cinema
+( mov_id number(10),
+  mov_name varchar2(50),
+  descript varchar2(50),
+  rating decimal(10,2)
+);
+
+o/p: Table created.
+
+INSERT ALL
+    INTO cinema (mov_id, mov_name, descript, rating) VALUES (1, 'Inception', 'Sci-fi thriller', 8.8)
+    INTO cinema (mov_id, mov_name, descript, rating) VALUES (2, 'The Godfather', 'Crime drama', 9.2)
+    INTO cinema (mov_id, mov_name, descript, rating) VALUES (3, 'Titanic', 'Romantic drama', 7.8)
+    INTO cinema (mov_id, mov_name, descript, rating) VALUES (4, 'Avatar', 'Sci-fi adventure', 7.9)
+SELECT * FROM dual;
+
+o/p: 4 rows created.
+ 
+or
+
+INSERT INTO cinema (mov_id, mov_name, descript, rating) VALUES (1, 'Inception', 'Sci-fi thriller', 8.8);
+INSERT INTO cinema (mov_id, mov_name, descript, rating) VALUES (2, 'The Godfather', 'Crime drama', 9.2);
+INSERT INTO cinema (mov_id, mov_name, descript, rating) VALUES (3, 'Titanic', 'Romantic drama', 7.8);
+INSERT INTO cinema (mov_id, mov_name, descript, rating) VALUES (4, 'Avatar', 'Sci-fi adventure', 7.9);
+
+
+select mov_name from cinema 
+where rating>7.0 and rating<9.0;
+
+o/p:
+mov_name
+Inception
+Titanic
+Avatar
+
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+10. Write a query to retrieve the records which have NULL rating from their book.
+
+CREATE TABLE library
+( book_id number(10),
+  title varchar2(50),
+  author varchar2(50),
+  pub_yr number(10),
+  rating decimal(10,2)
+ );
+
+o/p: Table created.
+
+insert into library
+values(1,'C language','Dennis',1972,9.8);
+
+o/p: 1 row created.
+
+insert all
+into library(book_id, title, author, pub_yr, rating)values(2,'Untouchable','Mulk Raj',5677,7.6),
+into library(book_id, title, author, pub_yr, rating)values(3,'Geetanjali',Rabindranath Tagore',1910,10),
+into library(book_id, title, author, pub_yr, rating)values(4,'wildlife',National Geograhhic,'Gills',2004,NULL )
+select * from dual;
+
+     				or
+
+
+INSERT INTO library(book_id, title, author, pub_yr, rating)
+VALUES
+(2, 'Tom B. Erichsen', 'Skagen ', '1806', 7.9),
+(3, 'Per Olsen', 'Gateveien ',  '1906',NULL ),
+(4, 'Finn Egan', 'Streetroad ', '1789', 6.8);
+
+o/p:  3 rows created.
+
+
+select * from library
+where rating is NULL;
+
+
+O/P: 1 row selected
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+11. Create a query to retrieve the records of those employees whose category is full time, ordered
+    by salary in descending order.
+
+create table employer
+( e_id number(10),
+  e_name varchar2(50),
+  company varchar2(50),
+  category varchar2(50),
+  department varchar2(50),
+  salary decimal(10,2)
+);
+
+o/p: Table created.
+
+insert into employer
+values(1, 'Priya', 'Infosys', 'Full Time', 'HR', 5800000.00);
+
+o/p: 1 row created.
+
+
+INSERT ALL
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (2, 'John Doe', 'TechCorp', 'Full Time', 'Engineering', 75000.00)
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (3, 'Jane Smith', 'HealthInc', 'Part Time', 'Marketing', 55000.00)
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (4, 'Alice Johnson', 'FinanceCorp', 'Full Time', 'Finance', 82000.00)
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (5, 'Bob Brown', 'TechCorp', 'Full Time', 'IT', 68000.00)
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (6, 'Carol White', 'RetailHub', 'Part Time', 'HR', 45000.00)
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (7, 'Eve Black', 'HealthInc', 'Full Time', 'Engineering', 90000.00)
+SELECT * FROM dual;
+
+  o/p: 6 rows created.
+
+
+SELECT * 
+FROM employer
+WHERE category = 'Full Time'
+ORDER BY salary DESC;
+
+o/p:
+
+e_id	e_name	company	category	department	salary
+1	Priya	Infosys	Full Time	HR	5800000
+6	Eve Black	HealthInc	Full Time	Engineering	90000
+3	Alice Johnson	FinanceCorp	Full Time	Finance	        82000
+1	John Doe	TechCorp	Full Time	Engineering	75000
+4	Bob Brown	TechCorp	Full Time	IT	        68000
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+12. Write a query to group the employees by their departments and 
+    display the total no. of the employees(total_employees) in each department.
+
+
+CREATE TABLE employer (
+  e_id NUMBER(10),
+  e_name VARCHAR2(50),
+  company VARCHAR2(50),
+  category VARCHAR2(50),
+  department VARCHAR2(50),
+  salary DECIMAL(10, 2)
+);
+
+o/p: Table created.
+
+INSERT INTO employer (e_id, e_name, company, category, department, salary)
+VALUES (1, 'John Doe', 'TechCorp', 'Full Time', 'Engineering', 75000.00);
+
+o/p: 1 row created.
+
+
+INSERT ALL
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (2, 'Jane Smith', 'HealthInc', 'Part Time', 'Marketing', 55000.00)
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (3, 'Alice Johnson', 'FinanceCorp', 'Full Time', 'Finance', 82000.00)
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (4, 'Bob Brown', 'TechCorp', 'Full Time', 'IT', 68000.00)
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (5, 'Carol White', 'RetailHub', 'Part Time', 'Sales', 45000.00)
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (6, 'Eve Black', 'HealthInc', 'Full Time', 'Engineering', 90000.00)
+    INTO employer (e_id, e_name, company, category, department, salary) VALUES (7, 'Mike Green', 'TechCorp', 'Full Time', 'Engineering', 72000.00)
+SELECT * FROM dual;
+
+
+o/p: 6 rows created.
+
+
+SELECT department, COUNT(*) AS total_employees
+FROM employer
+GROUP BY department;
+
+o/p:
+
+department	total_employees
+Engineering	2
+Finance	        1
+HR	        1
+IT	        1
+Marketing	1
+Sales	        1
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
