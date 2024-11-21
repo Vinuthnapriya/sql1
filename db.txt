@@ -1,0 +1,123 @@
+create table employees1
+(
+emp_id number(10),
+f_name varchar2(50),
+l_name varchar2(50),
+dept_id number(10),
+salary decimal(10,2),
+join_date date
+); 
+
+o/p:
+Table created.
+
+create table departments
+(
+dept_id number(10),
+dept_name varchar2(50)
+);
+
+o/p
+Table created.
+
+create table projects
+(
+pro_id number(10),
+pro_name varchar2(50),
+budget number(10)
+);
+
+o/p:
+Table created.
+
+INSERT INTO projects (pro_id, pro_name, budget)
+VALUES 
+(1, 'Website Redesign', 50000);
+INSERT INTO projects (pro_id, pro_name, budget)
+VALUES 
+(2, 'Mobile App Development', 150000);
+INSERT INTO projects (pro_id, pro_name, budget)
+VALUES 
+(3, 'Data Center Upgrade', 200000);
+INSERT INTO projects (pro_id, pro_name, budget)
+VALUES 
+(4, 'Marketing Campaign', 80000);
+INSERT INTO projects (pro_id, pro_name, budget)
+VALUES
+(5, 'Cloud Migration', 120000);
+
+o/p:
+5 rows created.
+
+create table emp_projects
+(
+emp_id number(10),
+pro_id number(10),
+assigned_date date,
+role varchar2(50)
+);
+
+o/p:
+Table created.
+
+INSERT INTO emp_projects (emp_id, pro_id, assigned_date, role)
+VALUES 
+(1, 1, TO_DATE('2024-01-01', 'YYYY-MM-DD'), 'Project Manager');
+INSERT INTO emp_projects (emp_id, pro_id, assigned_date, role)
+VALUES 
+(2, 2, TO_DATE('2024-02-15', 'YYYY-MM-DD'), 'Developer');
+INSERT INTO emp_projects (emp_id, pro_id, assigned_date, role)
+VALUES 
+(3, 1, TO_DATE('2024-03-10', 'YYYY-MM-DD'), 'Finance Analyst');
+INSERT INTO emp_projects (emp_id, pro_id, assigned_date, role)
+VALUES
+(3, 3, TO_DATE('2024-04-01', 'YYYY-MM-DD'), 'Accountant');
+INSERT INTO emp_projects (emp_id, pro_id, assigned_date, role)
+VALUES
+(4, 3, TO_DATE('2024-05-01', 'YYYY-MM-DD'), 'Developer');
+
+O/P: 
+5 ROWS CREATED.
+
+
+
+INSERT INTO employees1 (emp_id, f_name, l_name, dept_id, salary, join_date)
+VALUES  (1, 'John', 'Doe', 101, 55000.00, TO_DATE('20-01-2001', 'dd-MM-yyyy'));
+	(2, 'Jane', 'Smith', 102, 60000.00, TO_DATE('02-08-2023', 'dd-MM-yyyy'));
+	(3, 'Sam', 'Brown', 103, 45000.00, TO_DATE('18-03-2011', 'dd-MM-yyyy'));
+
+o/p:
+3 rows created.
+
+INSERT INTO departments (dept_id, dept_name)
+VALUES  (1, 'Human Resources');
+ 	(2, 'Finance');
+ 	(3, 'IT');
+	(4, 'Marketing');
+
+o/p:
+4 rows created.
+
+
+1. select join_date, f_name from employees1;
+
+
+2. select dept_name from departments;
+
+3. select count(f_name) from employees1;
+
+4. select max(salary) from employees1;
+
+5. select pro_name , budget from projects;
+
+6. select avg(salary) from employees1;
+
+7. select sum(budget) from projects;
+
+8. select f_name from employees1
+   where join_date < '20-JAN-2001';
+
+9. select distinct role from emp_projects;
+
+10. select count(pro_name) from projects
+    group by departments;
